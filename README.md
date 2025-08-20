@@ -203,37 +203,45 @@
 ## 📸 Captures d'écran / Screenshots
 
 <p><strong>Création terminée / Creation completed</strong></p>
-<img src="img/image1.png" alt="Création de VPS terminée" width="1100" />
+
 <p><em>FR: Message de confirmation après création du VPS.</em><br/>
 <em>EN: Confirmation message once the VPS is created.</em></p>
+<img width="381" height="528" alt="image1" src="https://github.com/user-attachments/assets/d0879a34-8a1b-465a-8643-916eeab2c8d1" />
 
 <p><strong>Création en cours / Creation in progress</strong></p>
-<img src="img/image2.png" alt="VPS en cours de création" width="1100" />
+
 <p><em>FR: Le VPS est en cours de création (commande déjà exécutée).</em><br/>
 <em>EN: VPS is being created (command already executed).</em></p>
+<img width="317" height="188" alt="image2" src="https://github.com/user-attachments/assets/5fbffb55-6348-4f24-90f5-be24bd140146" />
 
 <p><strong>Aperçu de commandes / Commands overview</strong></p>
-<img src="img/image3.png" alt="Commandes diverses 1" width="1100" />
+<img width="1057" height="416" alt="image3" src="https://github.com/user-attachments/assets/9387a6ad-bd10-4708-8f32-867a52b51ce9" />
+
 <p><em>FR: Plusieurs commandes affichées.</em><br/>
 <em>EN: Many commands shown.</em></p>
+<img width="1059" height="418" alt="image4" src="https://github.com/user-attachments/assets/611557df-3335-4a97-bb61-fe8f26644f20" />
 
 <p><strong>Aperçu de commandes / Commands overview</strong></p>
-<img src="img/image4.png" alt="Commandes diverses 2" width="1100" />
+<img width="1059" height="418" alt="image4" src="https://github.com/user-attachments/assets/3956d050-dc61-4aae-9346-864c743fb5f3" />
+
 <p><em>FR: Plusieurs commandes affichées.</em><br/>
 <em>EN: Many commands shown.</em></p>
+<img width="1067" height="407" alt="image5" src="https://github.com/user-attachments/assets/b21cb031-817f-4085-a37a-7af928b27646" />
 
 <p><strong>Aperçu de commandes / Commands overview</strong></p>
-<img src="img/image5.png" alt="Commandes diverses 3" width="1100" />
+
 <p><em>FR: Plusieurs commandes affichées.</em><br/>
 <em>EN: Many commands shown.</em></p>
+<img width="445" height="496" alt="image6" src="https://github.com/user-attachments/assets/32b00d71-6e65-40ab-bf17-1035ec87fbbc" />
 
 <p><strong>Statistiques globales / Global statistics</strong></p>
-<img src="img/image6.png" alt="Statistiques Proxmox (stats-all)" width="1100" />
+
 <p><em>FR: Commande <code>stats-all</code> listant toutes les statistiques Proxmox.</em><br/>
 <em>EN: <code>stats-all</code> command listing global Proxmox statistics.</em></p>
 
 <p><strong>Liste des VPS / VPS list</strong></p>
-<img src="img/image7.png" alt="Liste des VPS" width="1100" />
+<img width="312" height="243" alt="image7" src="https://github.com/user-attachments/assets/09100d3a-cf51-45fd-a666-43bf504382c2" />
+
 <p><em>FR: Commande listant les VPS.</em><br/>
 <em>EN: Command showing the list of VPS.</em></p>
 
