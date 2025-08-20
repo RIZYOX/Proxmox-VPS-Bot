@@ -200,8 +200,59 @@
  ### ⚠️ Limitations
  - Not suited for full‑screen TUIs; use a real SSH client or a web TTY.
 
----
+## 📸 Captures d'écran / Screenshots
+ 
+ - __Création terminée / Creation completed__
+   
+   ![Création de VPS terminée](img/image1.png)
+   
+   _FR: Message de confirmation après création du VPS._  
+   _EN: Confirmation message once the VPS is created._
+ 
+ - __Création en cours / Creation in progress__
+   
+   ![VPS en cours de création](img/image2.png)
+   
+   _FR: Le VPS est en cours de création (commande déjà exécutée)._  
+   _EN: VPS is being created (command already executed)._ 
+ 
+ - __Aperçu de commandes / Commands overview__
+   
+   ![Commandes diverses 1](img/image3.png)
+   
+   _FR: Plusieurs commandes affichées._  
+   _EN: Many commands shown._
+ 
+ - __Aperçu de commandes / Commands overview__
+   
+   ![Commandes diverses 2](img/image4.png)
+   
+   _FR: Plusieurs commandes affichées._  
+   _EN: Many commands shown._
+ 
+ - __Aperçu de commandes / Commands overview__
+   
+   ![Commandes diverses 3](img/image5.png)
+   
+   _FR: Plusieurs commandes affichées._  
+   _EN: Many commands shown._
+ 
+ - __Statistiques globales / Global statistics__
+   
+   ![Statistiques Proxmox (stats-all)](img/image6.png)
+   
+   _FR: Commande `stats-all` listant toutes les statistiques Proxmox._  
+   _EN: `stats-all` command listing global Proxmox statistics._
+ 
+ - __Liste des VPS / VPS list__
+   
+   ![Liste des VPS](img/image7.png)
+   
+   _FR: Commande listant les VPS._  
+   _EN: Command showing the list of VPS._
 
+---
+ 
 ## 🧑‍⚖️ License / Licence
 
 ### 🇫🇷 Licence (Tous droits réservés)
