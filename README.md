@@ -1,20 +1,7 @@
-### 📏 Disk resize rules (/vps resize_disk)
-- Unit required: `K/M/G/T`.
-- Accepted formats: `+4G`, `4G`, `+512M`.
-- `+N<U>` = growth (e.g., `+4G`).
-- `N<U>` without `+` = absolute target: if greater than current, converted to delta; if ≤ current → error (shrinking unsupported).
-- `+4` or `4` → error: missing unit (add `G/M/K/T`).
-- Negative values → rejected.
-### 📏 Règles de redimensionnement disque (/vps resize_disk)
-- Unité obligatoire: `K/M/G/T`.
-- Formats acceptés: `+4G`, `4G`, `+512M`.
-- `+N<U>` = croissance (ex: `+4G`).
-- `N<U>` sans `+` = cible absolue: si plus grand que l’actuel, converti en delta; si ≤ actuel → erreur (Proxmox n’autorise pas la réduction).
-- `+4` ou `4` → erreur: unité manquante (ajoutez `G/M/K/T`).
-- Valeurs négatives → interdites.
-
 # EZ VPS Bot 💠 Discord → Proxmox + SSH
  
+![titre](titre.png)
+
  Bilingue: FR | EN
  
  ---
@@ -73,6 +60,14 @@
  - `/stats-all` — Statistiques globales
  - `/authorize userid:<id>` — Autoriser un utilisateur (admin)
  - `/help` — Aide bilingue FR/EN
+
+  #### 📏 Règles de redimensionnement disque (/vps resize_disk)
+  - Unité obligatoire: `K/M/G/T`.
+  - Formats acceptés: `+4G`, `4G`, `+512M`.
+  - `+N<U>` = croissance (ex: `+4G`).
+  - `N<U>` sans `+` = cible absolue: si plus grand que l’actuel, converti en delta; si ≤ actuel → erreur (Proxmox n’autorise pas la réduction).
+  - `+4` ou `4` → erreur: unité manquante (ajoutez `G/M/K/T`).
+  - Valeurs négatives → interdites.
  
  ### ⌨️ Raccourci texte (sécurité incluse)
  Dans un salon:
@@ -181,6 +176,14 @@
  - `/stats-all`
  - `/authorize userid:<id>`
  - `/help`
+
+  #### 📏 Disk resize rules (/vps resize_disk)
+  - Unit required: `K/M/G/T`.
+  - Accepted formats: `+4G`, `4G`, `+512M`.
+  - `+N<U>` = growth (e.g., `+4G`).
+  - `N<U>` without `+` = absolute target: if greater than current, converted to delta; if ≤ current → error (shrinking unsupported).
+  - `+4` or `4` → error: missing unit (add `G/M/K/T`).
+  - Negative values → rejected.
  
  ### ⌨️ Text shortcut
  ```text
