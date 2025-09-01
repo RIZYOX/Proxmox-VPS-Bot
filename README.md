@@ -1,6 +1,6 @@
 # EZ VPS Bot 💠 Discord → Proxmox + SSH
  
-![titre](titre.png)
+![titre](/img/titre.png)
 
  Bilingue: FR | EN
  
