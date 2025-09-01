@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proxmox VPS Panel</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:,">
+  <meta name="color-scheme" content="dark light">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1 id="title">Proxmox VPS Panel</h1>
+      <div id="health" class="health">Loading…</div>
+    </div>
+    <div class="actions-right">
+      <button id="activity-toggle" title="Activity Log">📝 <span id="activity-label">Activity</span></button>
+    </div>
+
+  <!-- Action Modal (reusable) -->
+  <div id="actionModal" class="modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="action-title">Action</h2>
+        <button class="close" id="action-close" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div id="action-content"></div>
+        <div id="action-error" class="error" role="alert" hidden></div>
+      </div>
+      <div class="modal-footer">
+        <button id="action-cancel">Cancel</button>
+        <button id="action-submit" class="primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+    <div class="lang-switch" aria-label="Language switch">
+      <button class="lang" data-lang="fr" title="Français" aria-label="Français">🇫🇷 FR</button>
+      <button class="lang" data-lang="en" title="English" aria-label="English">🇬🇧 EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <p id="subtitle" class="subtitle">Manage your Proxmox VMs quickly and safely.</p>
+      <div class="toolbar">
+        <div class="left">
+          <button id="createVps" class="primary">＋ <span id="create-label">Create VPS</span></button>
+          <span id="count" class="muted"></span>
+        </div>
+        <div class="right">
+          <input type="text" id="filter" placeholder="Filter by name/vmid/status…" />
+          <button id="refresh">Refresh</button>
+        </div>
+      </div>
+      <!-- Stats Cards -->
+      <section id="stats" aria-live="polite">
+        <div class="cards">
+          <div class="card">
+            <span class="metric-label" id="stats-label-total">Total VMs</span>
+            <strong class="metric-value" id="stats-total">–</strong>
+          </div>
+          <div class="card">
+            <span class="metric-label" id="stats-label-running">Running</span>
+            <strong class="metric-value" id="stats-running">–</strong>
+          </div>
+          <div class="card">
+            <span class="metric-label" id="stats-label-stopped">Stopped</span>
+            <strong class="metric-value" id="stats-stopped">–</strong>
+          </div>
+          <div class="card">
+            <span class="metric-label" id="stats-label-cpu">Cluster CPU</span>
+            <strong class="metric-value" id="stats-cpu">–</strong>
+          </div>
+          <div class="card">
+            <span class="metric-label" id="stats-label-cores">CPU Cores</span>
+            <strong class="metric-value" id="stats-cores">–</strong>
+          </div>
+          <div class="card">
+            <span class="metric-label" id="stats-label-ram">Cluster RAM</span>
+            <strong class="metric-value" id="stats-ram">–</strong>
+          </div>
+          <div class="card">
+            <span class="metric-label" id="stats-label-disk">Cluster Disk</span>
+            <strong class="metric-value" id="stats-disk">–</strong>
+          </div>
+        </div>
+      </section>
+      <table id="vms">
+        <thead>
+          <tr>
+            <th id="th-vmid">VMID</th>
+            <th id="th-name">Name</th>
+            <th id="th-node">Node</th>
+            <th id="th-status">Status</th>
+            <th id="th-agent">Agent</th>
+            <th id="th-cpu">CPU</th>
+            <th id="th-ram">RAM</th>
+            <th id="th-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Activity Drawer -->
+  <aside id="activity" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h3 id="activity-title">Activity</h3>
+      <div class="spacer"></div>
+      <button id="activity-clear" class="ghost">Clear</button>
+      <button id="activity-close" class="close" aria-label="Close">×</button>
+    </div>
+    <div id="activity-list" class="drawer-body">
+      <div id="activity-empty" class="muted">No activity yet.</div>
+    </div>
+  </aside>
+
+  <!-- Toasts -->
+  <div id="toasts" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Create VPS Modal -->
+  <div id="createModal" class="modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="create-title">Create VPS</h2>
+        <button class="close" id="create-close" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="grid">
+          <label>
+            <span id="lbl-node">Node</span>
+            <select id="f-node"></select>
+          </label>
+          <label>
+            <span id="lbl-template">Template</span>
+            <select id="f-template"></select>
+          </label>
+          <label>
+            <span id="lbl-storage">Storage</span>
+            <select id="f-storage"></select>
+          </label>
+          <label>
+            <span id="lbl-name">Name</span>
+            <input id="f-name" type="text" />
+          </label>
+          <label>
+            <span id="lbl-cores">Cores</span>
+            <input id="f-cores" type="number" min="1" step="1" />
+          </label>
+          <label>
+            <span id="lbl-ram">RAM (MB)</span>
+            <input id="f-ram" type="number" min="256" step="128" />
+          </label>
+          <label>
+            <span id="lbl-disk">Disk (GB)</span>
+            <input id="f-disk" type="number" min="10" step="1" />
+          </label>
+          <label>
+            <span id="lbl-user">User</span>
+            <input id="f-user" type="text" />
+          </label>
+          <label>
+            <span id="lbl-pass">Password</span>
+            <input id="f-pass" type="password" />
+          </label>
+        </div>
+        <div id="create-error" class="error" role="alert" hidden></div>
+      </div>
+      <div class="modal-footer">
+        <button id="create-cancel">Cancel</button>
+        <button id="create-submit" class="primary">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <small id="footer-text">Local only • Non-redistributable • Source-available for private use</small>
+  </footer>
+
+  <script>
+    window.PANEL_TOKEN = '';
+  </script>
+  <script src="/script.js"></script>
+</body>
+</html>
