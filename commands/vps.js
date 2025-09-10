@@ -905,7 +905,10 @@ async function actionVPS(interaction, isEN) {
     const vmid = interaction.options.getInteger("vmid");
     const type = interaction.options.getString("type");
 
-    // ...
+    if (!vmid || !type) {
+      await interaction.editReply({ content: T('❌ Paramètres manquants (vmid/type).', '❌ Missing parameters (vmid/type).') });
+      return;
+    }
 
     // Blacklist: forbid management actions on listed VMIDs
     if (bl.hasVM(vmid)) {
@@ -913,7 +916,36 @@ async function actionVPS(interaction, isEN) {
       return;
     }
 
-    // ...
+    // Find which node the VM is on
+    const node = await findNodeByVMID(vmid);
+    if (!node) {
+      await interaction.editReply({ content: T(`❌ VMID ${vmid} introuvable.`, `❌ VMID ${vmid} not found.`) });
+      return;
+    }
+
+    // Execute the requested action
+    try {
+      switch (type.toLowerCase()) {
+        case 'start':
+          await px.startVM(node, vmid);
+          await interaction.editReply({ content: T(`🟢 Démarrage du VPS ${vmid} en cours...`, `🟢 Starting VPS ${vmid}...`) });
+          break;
+        case 'stop':
+          await px.stopVM(node, vmid);
+          await interaction.editReply({ content: T(`🔴 Arrêt du VPS ${vmid} en cours...`, `🔴 Stopping VPS ${vmid}...`) });
+          break;
+        case 'restart':
+          await px.rebootVM(node, vmid);
+          await interaction.editReply({ content: T(`🔄 Redémarrage du VPS ${vmid} en cours...`, `🔄 Restarting VPS ${vmid}...`) });
+          break;
+        default:
+          await interaction.editReply({ content: T(`❌ Action non supportée: ${type}`, `❌ Unsupported action: ${type}`) });
+          return;
+      }
+    } catch (err) {
+      log(`Error in VPS action ${type} on ${vmid}: ${err.message}`, 'ERROR', 'VPS');
+      throw err; // Let the outer catch handle it
+    }
   } catch (err) {
     log(err.stack, "ERROR", "VPS");
     const lang = getUserLang(interaction.user.id, interaction.guildId);
